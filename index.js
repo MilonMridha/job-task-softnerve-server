@@ -27,8 +27,15 @@ async function run() {
             res.send(result);
 
         });
+
+        // Post api
+        app.post('/students', async (req, res) => {
+            const addNew = req.body;
+            const result = await studentsCollection.insertOne(addNew);
+            res.send(result);
+        });
         //Get Api by Id
-        app.get('/users/:id', async (req, res) => {
+        app.get('/students/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) }
             const result = await studentsCollection.findOne(query);
