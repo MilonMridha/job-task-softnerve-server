@@ -45,17 +45,17 @@ async function run() {
         app.delete('/students/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) }
-            const result = await userCollection.deleteOne(query);
+            const result = await studentsCollection.deleteOne(query);
             res.send(result);
         });
         // Update Api
         app.put('/students/:id', async (req, res) => {
             const id = req.params.id;
-            const newUser = req.body;
+            const newStudent = req.body;
             const filter = { _id: ObjectId(id) }
             const options = { upsert: true }
             const updateDoc = {
-                $set: newUser
+                $set: newStudent
             };
             const result = await studentsCollection.updateOne(filter, updateDoc, options)
             res.send(result)
